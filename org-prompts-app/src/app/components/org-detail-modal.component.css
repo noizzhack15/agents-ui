@@ -1,0 +1,19 @@
+.modal-container {
+  padding: 20px;
+  min-width: 400px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}

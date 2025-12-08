@@ -9,13 +9,20 @@ export interface Organization {
   prompt: string;
 }
 
+interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  count?: number;
+  error?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class OrganizationService {
   // Update this to your backend base URL (e.g., http://localhost:3000 or https://api.example.com)
-  private readonly baseUrl = 'http://localhost:3000';
-  private readonly resource = 'agents'; // endpoint path
+  private readonly baseUrl = 'http://35.225.79.109:3000';
+  private readonly resource = 'api/agents'; // endpoint path
 
   private organizations$ = new BehaviorSubject<Organization[]>([]);
   private isLoading$ = new BehaviorSubject<boolean>(false);
@@ -40,10 +47,10 @@ export class OrganizationService {
   async loadOrganizations(): Promise<void> {
     try {
       this.isLoading$.next(true);
-      const docs = await firstValueFrom(
-        this.http.get<Organization[]>(this.url())
+      const response = await firstValueFrom(
+        this.http.get<ApiResponse<Organization[]>>(this.url())
       );
-      this.organizations$.next(docs ?? []);
+      this.organizations$.next(response.data ?? []);
     } catch (error) {
       console.error('Failed to load organizations from API:', error);
       this.organizations$.next([]);
@@ -55,10 +62,12 @@ export class OrganizationService {
   async addOrganization(org: Organization): Promise<void> {
     try {
       this.isLoading$.next(true);
-      const created = await firstValueFrom(
-        this.http.post<Organization>(this.url(), org)
+      const response = await firstValueFrom(
+        this.http.post<ApiResponse<Organization>>(this.url(), org)
       );
-      this.organizations$.next([...this.organizations$.value, created]);
+      if (response.data) {
+        this.organizations$.next([...this.organizations$.value, response.data]);
+      }
     } catch (error) {
       console.error('Error adding organization (API):', error);
       throw error;
@@ -70,14 +79,16 @@ export class OrganizationService {
   async updateOrganization(id: string, org: Organization): Promise<void> {
     try {
       this.isLoading$.next(true);
-      const updated = await firstValueFrom(
-        this.http.put<Organization>(this.url(id), org)
+      const response = await firstValueFrom(
+        this.http.put<ApiResponse<Organization>>(this.url(id), org)
       );
-      const current = this.organizations$.value;
-      const index = current.findIndex(o => o._id === id || o.id === org.id);
-      if (index !== -1) {
-        current[index] = { ...updated };
-        this.organizations$.next([...current]);
+      if (response.data) {
+        const current = this.organizations$.value;
+        const index = current.findIndex(o => o._id === id || o.id === org.id);
+        if (index !== -1) {
+          current[index] = { ...response.data };
+          this.organizations$.next([...current]);
+        }
       }
     } catch (error) {
       console.error('Error updating organization (API):', error);
@@ -91,7 +102,7 @@ export class OrganizationService {
     try {
       this.isLoading$.next(true);
       await firstValueFrom(
-        this.http.delete<void>(this.url(id))
+        this.http.delete<ApiResponse<any>>(this.url(id))
       );
       const current = this.organizations$.value;
       this.organizations$.next(current.filter(o => o._id !== id && o.id !== id));
