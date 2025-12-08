@@ -15,46 +15,8 @@ export interface DialogData {
   selector: 'app-org-detail-modal',
   standalone: true,
   imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
-  template: `
-    <div class="modal-container">
-      <h2>{{ data.isNew ? 'Add Organization' : 'Edit Organization' }}</h2>
-      
-      <form (ngSubmit)="onSave()">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Organization Name</mat-label>
-          <input matInput [(ngModel)]="data.organization.name" name="name" required />
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Prompt</mat-label>
-          <textarea matInput [(ngModel)]="data.organization.prompt" name="prompt" rows="4" required></textarea>
-        </mat-form-field>
-
-        <div class="modal-actions">
-          <button mat-raised-button type="submit" color="primary">Save</button>
-          <button mat-raised-button (click)="onCancel()">Cancel</button>
-        </div>
-      </form>
-    </div>
-  `,
-  styles: [`
-    .modal-container {
-      padding: 20px;
-      min-width: 400px;
-    }
-    h2 {
-      margin-top: 0;
-    }
-    .full-width {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-  `]
+  templateUrl: './org-detail-modal.component.html',
+  styleUrl: './org-detail-modal.component.css'
 })
 export class OrgDetailModalComponent {
   constructor(
