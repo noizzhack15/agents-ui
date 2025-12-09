@@ -14,7 +14,7 @@ export interface DialogData {
 @Component({
   selector: 'app-org-detail-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatDialogClose],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
   templateUrl: './org-detail-modal.component.html',
   styleUrl: './org-detail-modal.component.css'
 })

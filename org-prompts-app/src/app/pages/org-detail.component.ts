@@ -14,12 +14,11 @@ import { OrganizationService, Organization } from '../services/organization.serv
   imports: [
     CommonModule,
     FormsModule,
-    RouterLink,
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatSnackBarModule
-  ],
+],
   templateUrl: './org-detail.component.html',
   styleUrl: './org-detail.component.css'
 })
@@ -112,7 +111,6 @@ export class OrgDetailComponent implements OnInit {
 
   rejectSuggestion(): void {
     this.suggestion = null;
-    this.suggestionShown = true; // Mark as shown to prevent re-fetching
     this.showSuccess('ההצעה נדחתה');
   }
 
