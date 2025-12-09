@@ -113,4 +113,26 @@ export class OrganizationService {
       this.isLoading$.next(false);
     }
   }
+
+  getSuggestion(prompt: string): Observable<{ suggestion: string }> {
+    // Mock implementation for now - backend endpoint not ready yet
+    // return this.http.post<{ suggestion: string }>(`${this.baseUrl}/api/suggestions`, { prompt });
+    
+    // Mock data for testing
+    return new Observable(observer => {
+      setTimeout(() => {
+        observer.next({ 
+          suggestion: `הצעה משופרת עבור: "${prompt}"
+
+שיפורים מוצעים:
+• הוספת הקשר ברור יותר
+• שיפור המבנה והארגון
+• דיוק גבוה יותר בניסוח
+
+הפרומפט המשופר מאפשר תוצאות טובות ומדויקות יותר.`
+        });
+        observer.complete();
+      }, 1500);
+    });
+  }
 }

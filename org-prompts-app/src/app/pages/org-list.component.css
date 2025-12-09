@@ -1,0 +1,147 @@
+.app-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+h1 {
+  color: #212121;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Heebo', Arial, sans-serif;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.add-btn:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.table-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.table-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.org-table {
+  width: 100%;
+}
+
+table {
+  border: none;
+}
+
+th, td {
+  padding: 16px;
+  text-align: right;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  background-color: #f5f7fa;
+  font-weight: 700;
+  color: #212121;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+td {
+  color: #424242;
+  font-size: 16px;
+}
+
+/* RouterLink styling for organization names */
+.org-name-link {
+  color: #1976D2;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.org-name-link:hover {
+  color: #1565C0;
+  text-decoration: underline;
+}
+
+.prompt-cell {
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+tr:hover td {
+  background-color: #f9f9f9;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 16px;
+  }
+
+  .header-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  th, td {
+    padding: 12px 8px;
+    font-size: 14px;
+  }
+
+  .prompt-cell {
+    max-width: 200px;
+  }
+}
