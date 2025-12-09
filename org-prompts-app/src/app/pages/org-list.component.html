@@ -1,0 +1,45 @@
+<div class="app-container">
+  <div class="header-section">
+    <h1>מנהל פרומפטים</h1>
+    <button mat-raised-button color="primary" (click)="openAddModal()" class="add-btn">
+      <mat-icon>add</mat-icon>
+      הוסף אחראי
+    </button>
+  </div>
+
+  <div class="table-card">
+    <table mat-table [dataSource]="organizations" class="org-table">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>אחראי</th>
+        <td mat-cell *matCellDef="let element">
+          <a [routerLink]="['/org', element._id || element.id]" class="org-name-link">
+            {{ element.name }}
+          </a>
+        </td>
+      </ng-container>
+
+      <!-- Prompt Column -->
+      <ng-container matColumnDef="prompt">
+        <th mat-header-cell *matHeaderCellDef>פרומפט</th>
+        <td mat-cell *matCellDef="let element" class="prompt-cell">{{ element.prompt }}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" class="actions-cell">
+          <button mat-icon-button (click)="openEditModal(element)" color="accent" title="ערוך">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="confirmDelete(element)" color="warn" title="מחק">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

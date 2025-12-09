@@ -1,20 +1,20 @@
 <div class="modal-container">
-  <h2>{{ data.isNew ? 'Add Organization' : 'Edit Organization' }}</h2>
+  <h2>{{ data.isNew ? 'הוסף פרומפט' : 'ערוך פרומפט' }}</h2>
   
   <form (ngSubmit)="onSave()">
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Organization Name</mat-label>
-      <input matInput [(ngModel)]="data.organization.name" name="name" required />
+      <mat-label>שם האחראי</mat-label>
+      <input matInput [(ngModel)]="data.organization.name" name="name" aria-label="name" required />
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Prompt</mat-label>
-      <textarea matInput [(ngModel)]="data.organization.prompt" name="prompt" rows="4" required></textarea>
+      <mat-label>פרומפט</mat-label>
+      <textarea matInput [(ngModel)]="data.organization.prompt" name="prompt" aria-label="prompt" rows="4" required></textarea>
     </mat-form-field>
 
     <div class="modal-actions">
-      <button mat-raised-button type="submit" color="primary">Save</button>
-      <button mat-raised-button type="button" (click)="onCancel()">Cancel</button>
+      <button mat-raised-button type="submit" color="primary">שמור</button>
+      <button mat-raised-button type="button" (click)="onCancel()">ביטול</button>
     </div>
   </form>
 </div>
