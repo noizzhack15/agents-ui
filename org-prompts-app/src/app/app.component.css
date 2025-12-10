@@ -1,1 +1,34 @@
-/* Router outlet container - minimal styling */
+.app-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle mat-icon {
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:active mat-icon {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .theme-toggle {
+    bottom: 16px;
+    left: 16px;
+    transform: scale(0.9);
+  }
+}

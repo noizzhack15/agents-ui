@@ -84,7 +84,7 @@ export class OrganizationService {
       );
       if (response.data) {
         const current = this.organizations$.value;
-        const index = current.findIndex(o => o._id === id || o.id === org.id);
+        const index = current.findIndex(o => o._id === id || o.id === id);
         if (index !== -1) {
           current[index] = { ...response.data };
           this.organizations$.next([...current]);

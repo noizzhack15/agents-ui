@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,16 +25,12 @@ import { OrganizationService, Organization } from '../services/organization.serv
 export class OrgDetailComponent implements OnInit {
   organization: Organization | null = null;
   originalPrompt: string = '';
-  suggestion: string | null = null;
   loading = true;
   error = false;
-  loadingSuggestion = false;
   saving = false;
-  suggestionShown = false; // Track if suggestion was already shown
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private orgService: OrganizationService,
     private snackBar: MatSnackBar
   ) {}
@@ -80,40 +76,6 @@ export class OrgDetailComponent implements OnInit {
     });
   }
 
-  getSuggestion(): void {
-    if (!this.organization?.prompt) return;
-    
-    this.loadingSuggestion = true;
-    this.orgService.getSuggestion(this.organization.prompt)
-      .subscribe({
-        next: (response) => {
-          this.suggestion = response.suggestion;
-          this.loadingSuggestion = false;
-        },
-        error: (err) => {
-          this.showError('שגיאה בקבלת הצעה');
-          this.loadingSuggestion = false;
-        }
-      });
-  }
-
-  acceptSuggestion(): void {
-    if (this.suggestion && this.organization) {
-      this.organization.prompt = this.suggestion;
-      this.suggestion = null;
-      this.suggestionShown = true; // Mark as shown to prevent re-fetching
-      this.showSuccess('ההצעה אושרה');
-      
-      // Auto-save after accepting suggestion (but don't fetch suggestion again)
-      this.save();
-    }
-  }
-
-  rejectSuggestion(): void {
-    this.suggestion = null;
-    this.showSuccess('ההצעה נדחתה');
-  }
-
   async save(): Promise<void> {
     if (!this.organization || this.saving) return;
     
@@ -125,16 +87,10 @@ export class OrgDetailComponent implements OnInit {
       await this.orgService.updateOrganization(id, this.organization);
       this.originalPrompt = this.organization.prompt;
       this.showSuccess('נשמר בהצלחה');
-      
-      // Auto-trigger suggestion only if not already shown
-      if (!this.suggestionShown) {
-        this.getSuggestion();
-      }
     } catch (err) {
       this.showError('שגיאה בשמירה - נסה שוב');
     } finally {
       this.saving = false;
-      this.suggestionShown = false; // Reset for future edits
     }
   }
 

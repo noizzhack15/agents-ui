@@ -41,7 +41,7 @@
           mat-raised-button 
           color="primary" 
           (click)="save()"
-          [disabled]="!isModified || saving || loadingSuggestion"
+          [disabled]="!isModified || saving"
           class="action-btn">
           @if (saving) {
             <mat-spinner diameter="20" class="btn-spinner"></mat-spinner>
@@ -52,48 +52,6 @@
           שמור
         </button>
       </div>
-    </div>
-
-    <!-- Suggestion Sidebar -->
-    <div class="suggestion-sidebar">
-      <!-- Loading Suggestion State -->
-      @if (loadingSuggestion) {
-        <div class="suggestion-loading">
-          <mat-spinner diameter="40"></mat-spinner>
-          <p>מקבל הצעת שיפור...</p>
-        </div>
-      }
-
-      <!-- AI Suggestion Card -->
-      @if (suggestion && !loadingSuggestion) {
-        <div class="suggestion-card">
-          <div class="suggestion-header">
-            <mat-icon>lightbulb</mat-icon>
-            <h3>הצעה משופרת</h3>
-          </div>
-          <div class="suggestion-content">
-            {{ suggestion }}
-          </div>
-          <div class="suggestion-actions">
-            <button mat-raised-button color="primary" (click)="acceptSuggestion()" class="approve-btn">
-              <mat-icon>check</mat-icon>
-              אשר הצעה
-            </button>
-            <button mat-stroked-button (click)="rejectSuggestion()" class="decline-btn">
-              <mat-icon>close</mat-icon>
-              דחה הצעה
-            </button>
-          </div>
-        </div>
-      }
-
-      <!-- Placeholder when no suggestion -->
-      @if (!suggestion && !loadingSuggestion) {
-        <div class="suggestion-placeholder">
-          <mat-icon>auto_awesome</mat-icon>
-          <p>הצעות שיפור יופיעו כאן לאחר שמירה</p>
-        </div>
-      }
     </div>
   </div>
 }

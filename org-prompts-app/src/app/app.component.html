@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="app-wrapper">
+  <button 
+    mat-fab 
+    class="theme-toggle" 
+    (click)="toggleTheme()"
+    [matTooltip]="themeService.isDarkMode() ? 'למצב בהיר' : 'למצב כהה'"
+    matTooltipPosition="left">
+    <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+  <router-outlet></router-outlet>
+</div>

@@ -3,11 +3,13 @@
   min-width: 400px;
   direction: rtl;
   font-family: 'Heebo', Arial, sans-serif;
+  background-color: var(--card-background);
+  color: var(--text-primary);
 }
 
 h2 {
   margin: 0 0 24px 0;
-  color: #212121;
+  color: var(--text-primary);
   font-size: 24px;
   font-weight: 700;
 }
@@ -33,9 +35,13 @@ h2 {
   transition: all 0.2s ease;
 }
 
+.modal-actions button[color="primary"] {
+  color: #FFFFFF;
+}
+
 .modal-actions button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-sm);
 }
 
 /* RTL-specific overrides for Material form fields */
