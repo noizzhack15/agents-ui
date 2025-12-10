@@ -1,19 +1,21 @@
 <div class="modal-container">
   <h2>{{ data.isNew ? 'הוסף פרומפט' : 'ערוך פרומפט' }}</h2>
   
-  <form (ngSubmit)="onSave()">
+  <form [formGroup]="form" (ngSubmit)="onSave()">
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>שם האחראי</mat-label>
-      <input matInput [(ngModel)]="data.organization.name" name="name" aria-label="name" required />
+      <input matInput formControlName="name" aria-label="name" />
+      <mat-error>{{ getNameError() }}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>פרומפט</mat-label>
-      <textarea matInput [(ngModel)]="data.organization.prompt" name="prompt" aria-label="prompt" rows="4" required></textarea>
+      <textarea matInput formControlName="prompt" aria-label="prompt" rows="4"></textarea>
+      <mat-error>פרומפט הוא שדה חובה</mat-error>
     </mat-form-field>
 
     <div class="modal-actions">
-      <button mat-raised-button type="submit" color="primary">שמור</button>
+      <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">שמור</button>
       <button mat-raised-button type="button" (click)="onCancel()">ביטול</button>
     </div>
   </form>
