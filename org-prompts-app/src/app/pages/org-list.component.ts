@@ -35,7 +35,8 @@ export class OrgListComponent implements OnInit {
       width: '500px',
       data: {
         organization: { name: '', prompt: '' },
-        isNew: true
+        isNew: true,
+        existingOrganizations: this.organizations
       },
       disableClose: false
     });
@@ -52,7 +53,9 @@ export class OrgListComponent implements OnInit {
       width: '500px',
       data: {
         organization: { ...org },
-        isNew: false
+        isNew: false,
+        existingOrganizations: this.organizations,
+        currentOrgId: org._id
       }
     });
 
